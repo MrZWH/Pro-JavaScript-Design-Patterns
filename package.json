@@ -1,0 +1,31 @@
+{
+  "name": "pro-javascript-design-patterns",
+  "version": "1.0.0",
+  "description": "- 初始化 npm 环境\r - 安装 webpack\r - 安装 webpack-dev-server\r - 安装 babel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config ./webpack.dev.config.js --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrZWH/Pro-JavaScript-Design-Patterns.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MrZWH/Pro-JavaScript-Design-Patterns/issues"
+  },
+  "homepage": "https://github.com/MrZWH/Pro-JavaScript-Design-Patterns#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
