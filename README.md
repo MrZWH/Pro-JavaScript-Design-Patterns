@@ -415,3 +415,46 @@ if (window.jQuery != null) {
 ![](./images/6-3-2.PNG)
 - vue computed
 ![](./images/6-3-3.PNG)
+
+### 设计原则验证
+- 将旧接口和使用者进行分离
+- 符合开放封闭原则
+
+## 装饰器模式
+- 为对象添加新功能
+- 不改变其原有的结构和功能
+
+### 传统 UML 类图
+![](./images/7-1-1.PNG)
+
+### 简化后的 UML 类图
+![](./images/7-1-2.PNG)
+
+### 场景
+- ES7 装饰器
+- core-decorators
+
+#### ES7 装饰器
+配置环境：
+```
+npm install babel-plugin-transform-decorators-legacy -D
+``` 
+装饰类：
+![](./images/7-3-1.PNG)
+
+装饰方法：
+![](./images/7-3-2.PNG)
+![](./images/7-3-3.PNG)
+![](./images/7-3-4.PNG)
+![](./images/7-3-5.PNG)
+
+#### core-decorators
+- 第三方开源 lib
+- 提供常用的装饰器
+- 查阅文档：github.com/jayphelps/core-decorators
+![](./images/7-4-1.PNG)
+![](./images/7-4-2.PNG)
+
+### 设计原则验证
+- 将现有对象和装饰器进行分离，两者独立存在
+- 符合开放封闭原则
