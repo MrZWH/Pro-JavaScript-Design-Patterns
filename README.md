@@ -504,3 +504,89 @@ npm install babel-plugin-transform-decorators-legacy -D
 
 ### 设计原则验证
 - 不符合单一职责原则和开放封闭原则，因此谨慎使用不可滥用
+
+## 观察者模式
+- 发布 & 订阅
+- 一对多
+
+### 示例
+- 点咖啡，点好之后坐等被叫
+
+### 传统 UML 类图
+![](./images/10-1-1.PNG)
+
+### 简化后的 UML 类图
+![](./images/10-1-2.PNG)
+
+```js
+// 主题，保存状态，状态变化之后触发所有观察者对象
+class Subject {
+  constrouctor() {
+    this.state = 0
+    this.observers = []
+  }
+
+  getState() {
+    return this.state
+  }
+
+  setState() {
+    this.state = state
+    this.notifyAllObservers()
+  }
+  notifyAllObservers() {
+    this.observers.forEach(observer => {
+      observer.update()
+    })
+  }
+  attach(observer) {
+    this.observers.push(observer)
+  }
+}
+
+// 观察者
+class Observer {
+  constructor(name, subject) {
+    this.name = name
+    this.subject = subject
+    this.subject.attach(this)
+  }
+
+  update() {
+    console.log(`${this.name} update, state: ${this.subject.getState()}`)
+  }
+}
+
+// 测试
+let s = new Subject()
+let o1 = new Observer('o1', s)
+let o2 = new Observer('o2', s)
+let o3 = new Observer('o3', s)
+
+s.setState(1)
+s.setState(2)
+s.setState(3)
+```
+
+### 场景
+- 网页事件绑定
+- Promise
+- jQuery callback  
+![](./images/10-2-1.PNG)
+- nodejs 自定义事件  
+![](./images/10-3-1.PNG)
+![](./images/10-3-2.PNG)
+![](./images/10-3-3.PNG)
+![](./images/10-3-4.PNG)
+![](./images/10-3-5.PNG)
+
+### 其他场景
+- nodejs 中：处理 http 请求；多进程通讯  
+![](./images/10-4-1.PNG)
+![](./images/10-4-2.PNG)
+- vue 和 React 组件生命周期触发
+- vue watch
+
+### 设计原则验证
+- 主题和观察者分离，不是主动触发而是被动监听，两者解耦
+- 符合开放封闭原则
