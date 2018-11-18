@@ -678,3 +678,150 @@ while(iterator.hasNext()) {
 - 迭代器对象和目标对象分离
 - 迭代器将使用者与
 - 符合开放封闭原则
+
+## 状态模式
+- 一个对象有状态变化
+- 每次状态变化都会触发一个逻辑
+- 不能总是用 if...else 来控制
+
+### 示例
+- 交通信号灯
+
+### 传统 UML 类图
+![](./images/12-1-1.PNG)
+
+### 简化后 UML 类图
+![](./images/12-1-1.PNG)
+
+```js
+class State {
+  constructor(color) {
+    this.color = color
+  }
+
+  handle(context) {
+    console.log(`turn to ${this.color} light`)
+    context.setState(this)
+  }
+}
+
+class Context {
+  constructor() {
+    this.state = null
+  }
+
+  getState() {
+    return this.state
+  }
+
+  setState(state) {
+    this.state = state
+  }
+}
+
+let context = new Context()
+let green = new State('green')
+let yellow = new State('yellow')
+let red = new State('red')
+
+green.handle(context)
+console.log(context.getState())
+
+yellow.handle(context)
+console.log(context.getState())
+
+red.handle(context)
+console.log(context.getState())
+```
+
+### 场景
+- 有限状态机
+  - 有限个状态、以及在这些状态之间变化
+  - 如交通信号灯
+  - 使用开源 lib：javascript-state-machine
+  - github.com/jakesgordon/javascript-state-machine
+- 写一个 Promise
+
+#### 有限状态机代码演示
+![](./images/12-2-1.PNG)
+
+#### 写一个简单的 Promise 代码演示
+```js
+import StateMachine from 'javascript-state-machine'
+
+// 状态机模型
+let fsm = new StateMachine({
+  init: 'pending',
+  transitions: [
+    {
+      name: 'resolve',
+      from: 'pending',
+      to: 'fullfilled'
+    },
+    {
+      name: 'reject',
+      from: 'pending',
+      to: 'rejected'
+    }
+  ],
+  methods: {
+    onResolve: function(state, data) {
+      // state -当前状态机实例；data - fsm.resolve(xxx) 传递的参数
+      data.succesList.forEach(fn => fn())
+    },
+    onReject: function(state, data) {
+      data.failList.forEach(fn => fn())
+    }
+  }
+})
+
+// 定义 Promise
+class MyPromise {
+  constructor(fn) {
+    this.succesList = []
+    this.failList = []
+
+    fn(function() {
+      fsm.resolve(this)
+    }, function() {
+      fsm.reject(this)
+    })
+  }
+  then(succesFn, failFn) {
+    this.succesList.push(succesFn)
+    this.succesList.push(failFn)
+  }
+}
+
+function loadImg(src) {
+  const promise = new MyPromise(function(resolve, reject) {
+    let img = document.createElement('img')
+    img.onload = function() {
+      resolve(img)
+    }
+    img.onerror = function() {
+      reject()
+    }
+    img.src = src
+  })
+  return promise
+}
+
+let src = 'xxx'
+let result = loadImg(src)
+
+result.then(function() {
+  console.log('ok1')
+}, function() {
+  console.log('fail1')
+})
+
+result.then(function() {
+  console.log('ok2')
+}, function() {
+  console.log('fail2')
+})
+```
+
+### 设计原则验证
+- 将状态对象和主题对象分离，状态的变化逻辑单独处理
