@@ -377,7 +377,7 @@ park.out(car3)
 ### 说明
 - 单例模式需要用到 java 的特性（private）
 - ES6 中没有（typescript除外）
-- 用 java 代码来演示 UML 图内容
+- 用 java 代码来演示 UML 图内容  
 ![](./images/5-1-2.PNG)
 ![](./images/5-1-3.PNG)
 
@@ -410,10 +410,10 @@ if (window.jQuery != null) {
 ![](./images/6-1-2.PNG)
 
 ### 场景
-- 封装旧接口
+- 封装旧接口  
 ![](./images/6-3-1.PNG)
 ![](./images/6-3-2.PNG)
-- vue computed
+- vue computed  
 ![](./images/6-3-3.PNG)
 
 ### 设计原则验证
@@ -439,10 +439,10 @@ if (window.jQuery != null) {
 ```
 npm install babel-plugin-transform-decorators-legacy -D
 ``` 
-装饰类：
+装饰类：  
 ![](./images/7-3-1.PNG)
 
-装饰方法：
+装饰方法：  
 ![](./images/7-3-2.PNG)
 ![](./images/7-3-3.PNG)
 ![](./images/7-3-4.PNG)
@@ -451,7 +451,7 @@ npm install babel-plugin-transform-decorators-legacy -D
 #### core-decorators
 - 第三方开源 lib
 - 提供常用的装饰器
-- 查阅文档：github.com/jayphelps/core-decorators
+- 查阅文档：github.com/jayphelps/core-decorators  
 ![](./images/7-4-1.PNG)
 ![](./images/7-4-2.PNG)
 
